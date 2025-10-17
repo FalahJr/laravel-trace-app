@@ -1,6 +1,7 @@
 <footer class="main-footer">
     <div class="footer-left">
-        &copy; 2024 Vicky Maulana | <a href="https://www.vickymaulana.my.id">My Portofolio</a>
+        &copy; 2025 <a href="">PT. Elevate (Empowering Leadership, Vision, and Teamwork
+            Excellence)</a>
     </div>
     <div class="footer-right">
         1.0.0

@@ -18,10 +18,10 @@
                         <a class="nav-link" href="{{ url('hakakses') }}"><i class="fas fa-user-shield"></i> <span>Hak
                                 Akses</span></a>
                     </li> --}}
-                    <li class="menu-header">Users</li>
+                    <li class="menu-header">Manajemen</li>
                     <li class="{{ Request::is('users*') ? 'active' : '' }}">
                         <a class="nav-link" href="{{ route('users.index') }}"><i class="fas fa-users"></i>
-                            <span>Users</span></a>
+                            <span>Manajemen Pengguna</span></a>
                     </li>
                 @endif
                 <!-- profile ganti password -->
@@ -34,8 +34,8 @@
                     <a class="nav-link" href="{{ url('profile/change-password') }}"><i class="fas fa-key"></i> <span>Ganti
                             Password</span></a>
                 </li>
-                <li class="menu-header">Starter</li>
-                <li class="{{ Request::is('blank-page') ? 'active' : '' }}">
+                {{-- <li class="menu-header">Starter</li> --}}
+                {{-- <li class="{{ Request::is('blank-page') ? 'active' : '' }}">
                     <a class="nav-link" href="{{ url('blank-page') }}"><i class="far fa-square"></i> <span>Blank
                             Page</span></a>
                 </li>
@@ -87,7 +87,7 @@
                 <li class="{{ Request::is('about-example') ? 'active' : '' }}">
                     <a class="nav-link" href="{{ url('about-example') }}"><i class="fas fa-info-circle"></i> <span>About
                             Example</span></a>
-                </li>
+                </li> --}}
             </ul>
         </aside>
     </div>
