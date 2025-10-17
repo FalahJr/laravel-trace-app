@@ -13,8 +13,9 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withMiddleware(function (Middleware $middleware) {
         //
         $middleware->alias([
-
             'diskominfo' => \App\Http\Middleware\superadmin::class,
+            'auditor' => \App\Http\Middleware\auditor::class,
+            'roles' => \App\Http\Middleware\MultipleRoleMiddleware::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {

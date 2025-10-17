@@ -12,8 +12,14 @@ class UserController extends Controller
 {
     public function __construct()
     {
-        // Use existing alias 'superadmin' which checks for role 'diskominfo' in middleware
-        $this->middleware(['auth', 'diskominfo']);
+        // Base authentication for all methods
+        $this->middleware(['auth']);
+
+        // Allow both diskominfo and auditor to access index and show
+        $this->middleware(['roles:diskominfo,auditor'])->only(['index', 'show']);
+
+        // Restrict create, edit, update, and delete methods to diskominfo only
+        $this->middleware(['roles:diskominfo'])->only(['create', 'store', 'edit', 'update', 'destroy']);
     }
 
     /**

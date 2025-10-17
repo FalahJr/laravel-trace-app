@@ -25,12 +25,12 @@
                     </li>
                 @endif
                 <!-- profile ganti password -->
-                {{-- <li class="menu-header">Profile</li> --}}
-                {{-- <li class="{{ Request::is('profile/edit') ? 'active' : '' }}">
+                {{-- <li class="menu-header">Profile</li>
+                <li class="{{ Request::is('profile/edit') ? 'active' : '' }}">
                     <a class="nav-link" href="{{ url('profile/edit') }}"><i class="far fa-user"></i>
                         <span>Profile</span></a>
-                </li> --}}
-                {{-- <li class="{{ Request::is('profile/change-password') ? 'active' : '' }}">
+                </li>
+                <li class="{{ Request::is('profile/change-password') ? 'active' : '' }}">
                     <a class="nav-link" href="{{ url('profile/change-password') }}"><i class="fas fa-key"></i> <span>Ganti
                             Password</span></a>
                 </li> --}}

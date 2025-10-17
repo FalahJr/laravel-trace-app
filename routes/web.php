@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.login');
 });
 
 Auth::routes();
@@ -23,8 +23,8 @@ Route::middleware(['auth'])->group(function () {
     Route::put('/hakakses/update/{id}', [App\Http\Controllers\HakaksesController::class, 'update'])->name('hakakses.update')->middleware('superadmin');
     Route::delete('/hakakses/delete/{id}', [App\Http\Controllers\HakaksesController::class, 'destroy'])->name('hakakses.delete')->middleware('superadmin');
 
-    // User Management (superadmin only)
-    Route::resource('users', App\Http\Controllers\UserController::class)->middleware('diskominfo');
+    // User Management (diskominfo and auditor)
+    Route::resource('users', App\Http\Controllers\UserController::class)->middleware('roles:diskominfo,auditor');
 
     Route::get('/table-example', [App\Http\Controllers\ExampleController::class, 'table'])->name('table.example');
     Route::get('/clock-example', [App\Http\Controllers\ExampleController::class, 'clock'])->name('clock.example');

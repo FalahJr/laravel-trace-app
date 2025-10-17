@@ -33,7 +33,9 @@
                         <dd class="col-sm-9">{{ $user->updated_at?->format('Y-m-d H:i') }}</dd>
                     </dl>
                     <div class="text-right">
-                        <a href="{{ route('users.edit', $user) }}" class="btn btn-warning">Edit</a>
+                        @if (Auth::user()->role == 'diskominfo')
+                            <a href="{{ route('users.edit', $user) }}" class="btn btn-warning">Edit</a>
+                        @endif
                         <a href="{{ route('users.index') }}" class="btn btn-secondary">Kembali</a>
                     </div>
                 </div>

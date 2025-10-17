@@ -7,7 +7,9 @@
         <div class="section-header">
             <h1>Manajemen User</h1>
             <div class="section-header-breadcrumb ml-auto">
-                <a href="{{ route('users.create') }}" class="btn btn-primary"><i class="fas fa-plus"></i> Tambah User</a>
+                @if (Auth::user()->role == 'diskominfo')
+                    <a href="{{ route('users.create') }}" class="btn btn-primary"><i class="fas fa-plus"></i> Tambah User</a>
+                @endif
             </div>
         </div>
 
@@ -52,15 +54,21 @@
                                 <td><span class="badge badge-info">{{ $user->role }}</span></td>
                                 <td>{{ $user->created_at?->format('Y-m-d H:i') }}</td>
                                 <td>
-                                    <a href="{{ route('users.edit', $user) }}" class="btn btn-sm btn-warning"><i
-                                            class="fas fa-edit"></i> Edit</a>
-                                    <form action="{{ route('users.destroy', $user) }}" method="POST"
-                                        style="display:inline-block" onsubmit="return confirm('Hapus user ini?');">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i>
-                                            Hapus</button>
-                                    </form>
+                                    @if (Auth::user()->role == 'diskominfo')
+                                        <a href="{{ route('users.edit', $user) }}" class="btn btn-sm btn-warning"><i
+                                                class="fas fa-edit"></i> Edit</a>
+                                        <form action="{{ route('users.destroy', $user) }}" method="POST"
+                                            style="display:inline-block" onsubmit="return confirm('Hapus user ini?');">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-sm btn-danger"><i
+                                                    class="fas fa-trash"></i>
+                                                Hapus</button>
+                                        </form>
+                                    @else
+                                        <a href="{{ route('users.show', $user) }}" class="btn btn-sm btn-info"><i
+                                                class="fas fa-eye"></i> Detail</a>
+                                    @endif
                                 </td>
                             </tr>
                         @empty
