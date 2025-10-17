@@ -3,74 +3,113 @@
 @section('title', 'Ganti Password')
 
 @section('content')
-<div class="main-content">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Ganti Password') }}</div>
+    <section class="section">
+        <div class="section-header">
+            <h1>Ganti Password</h1>
+        </div>
 
-                <div class="card-body">
-                    <form method="POST" action="{{ route('profile.password') }}">
-                        @csrf
-                        @method('PUT')
-                        <div class="form-group row">
+        <div class="section-body">
+            <div class="row">
+                <div class="col-12 col-md-8 col-lg-6 mx-auto">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4>Data Password</h4>
+                        </div>
+
+                        <div class="card-body">
                             @if (session('status'))
-                                <div class="alert alert-success">
+                                <div class="alert alert-success alert-dismissible fade show">
                                     {{ session('status') }}
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
                                 </div>
                             @endif
-                            <label for="current_password" class="col-md-4 col-form-label text-md-right">{{ __('Password Sekarang') }}</label>
 
-                            <div class="col-md-6">
-                                <input id="current_password" type="password" class="form-control @error('current_password') is-invalid @enderror" name="current_password" required autocomplete="current_password">
+                            <form method="POST" action="{{ route('profile.password') }}">
+                                @csrf
+                                @method('PUT')
 
-                                @error('current_password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
+                                <div class="form-group">
+                                    <label for="current_password">Password Sekarang</label>
+                                    <div class="input-group">
+                                        <input id="current_password" type="password"
+                                            class="form-control @error('current_password') is-invalid @enderror"
+                                            name="current_password" required>
+                                        <div class="input-group-append">
+                                            <button class="btn btn-outline-secondary toggle-password" type="button"
+                                                data-toggle="#current_password">
+                                                <i class="fa fa-eye"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    @error('current_password')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="new_password">Password Baru</label>
+                                    <div class="input-group">
+                                        <input id="new_password" type="password"
+                                            class="form-control @error('new_password') is-invalid @enderror"
+                                            name="new_password" required>
+                                        <div class="input-group-append">
+                                            <button class="btn btn-outline-secondary toggle-password" type="button"
+                                                data-toggle="#new_password">
+                                                <i class="fa fa-eye"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    @error('new_password')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="new_password_confirmation">Konfirmasi Password Baru</label>
+                                    <div class="input-group">
+                                        <input id="new_password_confirmation" type="password" class="form-control"
+                                            name="new_password_confirmation" required>
+                                        <div class="input-group-append">
+                                            <button class="btn btn-outline-secondary toggle-password" type="button"
+                                                data-toggle="#new_password_confirmation">
+                                                <i class="fa fa-eye"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group text-right">
+                                    <button type="submit" class="btn btn-primary">
+                                        Ganti Password
+                                    </button>
+                                </div>
+                            </form>
                         </div>
-                        <div class="form-group row">
-                            <label for="new_password" class="col-md-4 col-form-label text-md-right">{{ __('Password Baru') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="new_password" type="password" class="form-control @error('new_password') is-invalid @enderror" name="new_password" required autocomplete="new_password">
-
-                                @error('new_password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="new_password_confirmation" class="col-md-4 col-form-label text-md-right">{{ __('Konfirmasi Password Baru') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="new_password_confirmation" type="password" class="form-control @error('new_password_confirmation') is-invalid @enderror" name="new_password_confirmation" required autocomplete="new_password_confirmation">
-
-                                @error('new_password_confirmation')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <!-- Add more fields as necessary -->
-
-                        <div class="form-group row mb-0">
-                            <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Ganti Password') }}
-                                </button>
-                            </div>
-                        </div>
-                    </form>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-</div>
+    </section>
+
+    @push('scripts')
+        <script>
+            $(document).ready(function() {
+                $('.toggle-password').click(function() {
+                    const target = $(this).attr('data-toggle');
+                    const input = $(target);
+                    const icon = $(this).find('i');
+
+                    if (input.attr('type') === 'password') {
+                        input.attr('type', 'text');
+                        icon.removeClass('fa-eye').addClass('fa-eye-slash');
+                    } else {
+                        input.attr('type', 'password');
+                        icon.removeClass('fa-eye-slash').addClass('fa-eye');
+                    }
+                });
+            });
+        </script>
+    @endpush
 @endsection
